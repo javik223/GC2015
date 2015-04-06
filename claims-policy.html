@@ -18,20 +18,22 @@
                 <li><a href="/services.html" title="Garment Care Services">Services</a></li>
                 <li><a href="/contact.html" title="Garment Care Contact &amp; Offices &amp; Locations">Contact/Locations</a></li>
                 <li><a href="/blog.html" title="Garment Care Blog &amp; Insights">Blog</a></li>
-                <li class="ml-hide light"><a href="/login">Login</a></li>
-                <li class="ml-hide light"> <a href="/login"><span class="icon-wash"></span><span>Begin A New Laundry</span></a></li>
+                <li class="ml-hide light"><a href="/login" class="loginBtn">Login</a></li>
+                <li class="ml-hide light"> <a href="/login" class="loginBtn"><span class="icon-wash"></span><span>Begin A New Laundry</span></a></li>
             </ul>
         </nav>
 
         <div class="col m-4-12 text-center logo">
-            <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="120">
+            <a href="/" title="Garment Care Limited">
+                <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="120">
 
-            <h1>Garment Care Limited</h1>
+                <h1>Garment Care Limited</h1>
+            </a>
         </div>
 
         <div class="col m-4-12 login-social text-right">
             <ul>
-                <li><a href="/login" title="Login to Garment Care Laundry Portal" class="text-bold">Login</a> / <a href="/Begin-a-new-laundry" title="Begin A New Laundry" class="text-bold">Begin A New Laundry</a></li>
+                <li><a href="/login" title="Login to Garment Care Laundry Portal" class="text-bold loginBtn">Login</a> / <a href="/Begin-a-new-laundry" title="Begin A New Laundry" class="text-bold loginBtn">Begin A New Laundry</a></li>
                 <li>
                     <a href="http://www.twitter.com" title="Garment Care on Twitter"> <span class="icon-twitter"></span></a>
                     <a href="http://www.facebook.com" title="Garment Care on Facebook"><span class="icon-facebook"></span></a>
@@ -81,7 +83,7 @@
 </div>
 <footer class="footer mt-pad">
     <div class="row">
-        <div class="col m-3-12 logo">
+        <div class="col m-3-12 logo pbb">
             <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="80">
 
         </div>
@@ -134,6 +136,100 @@
         </div>
     </div>
 </footer>
+
+<div class="login-overlay">
+    <div class="col m-4-12 l-6-12 side-icon s-hide">
+        <span class="icon-wash2"></span>
+    </div>
+
+    <div class="col m-8-12 l-6-12 content">
+        <div class="col m-12-12 text-center logo">
+            <div class="sign-in">
+                <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="100" class ="pbb">
+
+                <div class="row">
+                    <h3>Sign in</h3>
+
+                    <p class="pbb m-8-12 m-offset-2 end">Please Sign in to Begin A New Laundry, Manage Your Orders and Track or Check the status of your current transactions</p>
+                </div>
+
+                <div>
+                    <form action="" class="login-form">
+                        <input type="text" name="username" placeholder="Email" class="email">
+                        <input type="password" name="password" placeholder="Password" class="password">
+                        <p class="error"></p>
+                        <input type="submit" name="submit" value="Sign In" class="button">
+                    </form>
+                </div>
+
+                <p>Can't Remember your password? <a href="/retrieve-password" class="retrievePassBtn"><strong>Retrieve</strong></a></p>
+
+                <p>Don't have an acocunt? <br><br> <a href="/new-account" class="button button-inverse signUpBtn"><strong>Create Account</strong></a></p>
+
+                <p class="pbb"></p>
+
+                <img src="/assets/img/payment-platforms.png" alt="" width="300">
+            </div>
+
+            <div class="sign-up">
+                <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="100" class ="pbb">
+
+                <div class="row">
+                    <h3>Create A New Account</h3>
+
+                    <p class="pbb m-8-12 m-offset-2 end"></p>
+                </div>
+
+                <div>
+                   <form action="" class="sign-up-form">
+                        <input type="text" name="firstname" placeholder="Firstname" class="fname">
+                        <input type="text" name="lastname" placeholder="Last Name" class="lname">
+                        <input type="text" name="email" placeholder="Email" class="email">
+                        <input type="password" name="password" placeholder="Password" class="pword">
+                        <input type="text" name="mobile-number" placeholder="Mobile Number" class="phone">
+                        <p class="small">Please do not precede number with zero - example 89123456789</p>
+                        <p class="error"></p>
+                        <input type="submit" name="submit" value="Create Account" class="button">
+                   </form>
+                </div>
+
+                <p>Already have an account? <a href="/retrieve-password" class="signInBtn"><strong>Sign In</strong></a></p>
+
+                <p class="pbb"></p>
+
+                <img src="/assets/img/payment-platforms.png" alt="" width="300">
+            </div>
+
+            <div class="password-forgot">
+                 <img src="/assets/img/garment-care-logo.png" alt="Garment Care Limited" width="100" class ="pbb">
+
+                <div class="row">
+                    <h3>Retrieve Your Password</h3>
+
+                    <p class="pbb m-8-12 m-offset-2 end">
+                        Please enter your emaill address to get a new password
+                    </p>
+                </div>
+
+                <div>
+                   <form action="" class="forgot-password-form">
+                        <input type="text" name="email" placeholder="Email" class="email">
+                    <input type="submit" name="submit" value="Retrieve Password" class="button">
+                    <p class="error"></p>
+                   </form>
+                </div>
+
+                <p><a href="/retrieve-password" class="signInBtn"><strong>Back To Sign In</strong></a></p>
+
+                <p class="pbb"></p>
+
+                <img src="/assets/img/payment-platforms.png" alt="" width="300">
+            </div>
+        </div>
+
+        <div class="close"></div>
+    </div>
+</div>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>

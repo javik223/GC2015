@@ -33,7 +33,7 @@ ToggleMenu.prototype.showHideMenu = function() {
         tSelf.hideMenu();
    }
 
-   tSelf.navVisible = !self.navVisible;
+   tSelf.navVisible = !tSelf.navVisible;
 };
 
 ToggleMenu.prototype.showMenu = function() {
@@ -167,13 +167,165 @@ Service.prototype.replaceContent = function(data) {
   
 };
 
+function SignupsOverlay() {
+  this.el = $(".login-overlay");
+  this.closeBtn = this.el.find('.close');
+  this.signIn = this.el.find('.sign-in');
+  this.signInBtn = this.el.find('.signInBtn');
+  this.signUp = this.el.find('.sign-up');
+  this.signUpBtn = this.el.find('.signUpBtn');
+  this.retrievePassBtn = this.el.find('.retrievePassBtn');
+  this.retrievePassCont = this.el.find('.password-forgot');
+  this.playHead = new TimelineMax({paused: true});
+  this.rt = new TimelineMax({paused: true});
+  this.sut = new TimelineMax({paused: true});
+  this.loginForm = $(".login-form");
+  this.forgotPasswordForm = $(".forgot-password-form");
+  this.signUpForm = $('.sign-up-form');
+  this.init();
+  SOSelf = this;
+}
+
+SignupsOverlay.prototype.init = function() {
+  this.loginForm.prop("disabled", true);
+
+  this.playHead.set(this.el, {display: "block"})
+          .from(this.el, 1, {autoAlpha: 1, yPercent: "-100%", force3D: true, ease:Expo.easeOut});
+
+  this.rt.set(this.retrievePassCont, {display: "block"})
+          .from(this.retrievePassCont, 1, {autoAlpha: 1, xPercent: "100%", force3D: true, ease:Expo.easeOut});
+
+  this.sut.set(this.signUp, {display: "block"})
+          .from(this.signUp, 1, {autoAlpha: 1, xPercent: "100%", force3D: true, ease:Expo.easeOut});
+
+  this.closeBtn.on('click', function(){
+    SOSelf.close();
+  });
+
+  this.retrievePassBtn.on('click', function(e){
+    SOSelf.retrievePassOpen();
+
+    e.preventDefault();
+  });
+
+  this.signUpBtn.on('click', function(e){
+    SOSelf.signUpOpen();
+
+    e.preventDefault();
+  });
+
+  this.signInBtn.on('click', function(e){
+    SOSelf.signInOpen();
+
+    e.preventDefault();
+  });
+
+  this.loginForm.on('submit', function(e){
+      var param = {};
+      param.email = $(this).find(".email").val();
+      param.password = $(this).find('.password').val();
+      param.mode = "login";
+      var lF = $.post("http://www.garmentcareltd.com/testsite/functionality.php", param, function (data){
+      }).done(function(data){
+        data = $.trim(data);
+        //console.log(data);
+        if (data == "-2") {
+          document.location.href = "http://www.garmentcareltd.com/testsite/dashboard.php";
+        } else if (data == "0" ) {
+          SOSelf.loginForm.find('.error').html('<strong>Invalid Login Details.</strong> Please use your correct email and password.').addClass('show');
+        } else if (data == "-1") {
+          SOSelf.loginForm.find('.error').html('<strong>Sorry, your account has been disabled.</strong>').addClass('show');
+        }
+      });
+
+      e.preventDefault();
+  });
+
+  this.forgotPasswordForm.on('submit', function(e) {
+    var param = {};
+    param.email = $(this).find('.email').val();
+    param.mode = "forgotPassword";
+
+
+    var fPP = $.post("http://www.garmentcareltd.com/testsite/functionality.php", param, function (data){
+      }).done(function(data){
+        data = $.trim(data);
+        console.log(data);
+        if (data == "-1") {
+          SOSelf.forgotPasswordForm.find('.error').html("<strong>A new password has been emailed to you. <br> Please follow the instructions to reset your password</strong>");
+        } else if (data == "-2" ) {
+          SOSelf.forgotPasswordForm.find('.error').html('<strong>Sorry.</strong> There is no account with that email address. <br>Signup for a new account').addClass('show');
+        } else if (data == "0") {
+          SOSelf.forgotPasswordForm.find('.error').html('<strong>There was an issue sending a new password to your email box. Please try again, or contact us if this error persists</strong>').addClass('show');
+        } else {
+          SOSelf.forgotPasswordForm.find('.error').html('<strong>There was an issue sending a new password to your email box. Please try again, or contact us if this error persists</strong>').addClass('show');
+        }
+      });
+
+      e.preventDefault();
+  });
+
+this.signUpForm.on('submit', function(e) {
+    var param = {};
+    param.name = $(this).find('.fname').val();
+    param.lname = $(this).find('.lname').val();
+    param.email = $(this).find('.email').val();
+    param.password = $(this).find('.pword').val();
+    param.mobile = $(this).find('.phone').val();
+    param.mode = "register";
+
+
+    var fPP = $.post("http://www.garmentcareltd.com/testsite/functionality.php", param, function (data){
+      }).done(function(data){
+        data = $.trim(data);
+        console.log(data);
+        if (data == "0") {
+          SOSelf.signUpForm.find('.error').html("<strong>Account already exists</strong>");
+        } else if (data == "-1" ) {
+          SOSelf.signUpForm.find('.error').html('<strong>Password must be more than 3 characters in length.</strong>').addClass('show');
+        } else if (data == "-2") {
+          SOSelf.signUpForm.find('.error').html('<strong>Congratulations! account is created, check your email for verification.</strong>').addClass('show');
+        }  else if (data == "-3") {
+          SOSelf.signUpForm.find('.error').html('<strong>An unknown error occurred, please try again.</strong>').addClass('show');
+        } else {
+          SOSelf.signUpForm.find('.error').html('<strong>Error: '+data+' </strong>').addClass('show');
+        }
+      });
+
+      e.preventDefault();
+  });
+
+};
+
+SignupsOverlay.prototype.retrievePassOpen = function() {
+  this.rt.play();
+};
+
+SignupsOverlay.prototype.open = function() {
+  this.playHead.play();
+};
+
+SignupsOverlay.prototype.signInOpen = function() {
+  this.rt.reverse();
+  this.sut.reverse();
+};
+
+SignupsOverlay.prototype.signUpOpen = function() {
+  this.rt.reverse();
+  this.sut.play();
+};
+
+SignupsOverlay.prototype.close = function() {
+  this.playHead.reverse();
+};
 
 $(document).ready(function(){
-   var $menu, $nav, _menu, $homeBanners, $services;
+   var $menu, $nav, _menu, $homeBanners, $services, signups, $loginBtn;
 
    $menu = $(".menu");
    $nav = $(".nav");
    $homeBanners = $(".home-banners");
+   $loginBtn = $(".loginBtn");
 
    // Instantiate Menu Display Object
 
@@ -184,6 +336,19 @@ $(document).ready(function(){
    if ($services.length > 0) {
       var service = new Service();
    }
+
+   sO = new SignupsOverlay();
+
+   $loginBtn.each(function(){
+      $this = $(this);
+      $this.on('click', function(e){
+        TweenMax.to("body", 1, {scrollTop: 0, ease:Expo.easeInOut, onComplete: function(){
+            sO.open();
+          }});
+
+        e.preventDefault();
+     });
+   });
 
    $services.each(function(){
       $(this).on('click', function(e){

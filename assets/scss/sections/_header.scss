@@ -16,6 +16,8 @@
 		font-size: rem-calc(18);
 		line-height: 1.6;
 		font-weight: 100;
+		position: relative;
+		z-index: 10000;
 
 		@media #{$small-only} {
 			display: none;

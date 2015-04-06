@@ -15,4 +15,10 @@
 	.copyright {
 		margin-top: $padding * 2;
 	}
+
+	.quick-contact {
+		@media #{$small-only} {
+			text-align: left;
+		}
+	}
 }

@@ -16,9 +16,11 @@ button, .button {
 	&-inverse {
 		background-color: color($white);
 		color: color($primary) !important;
+		border: 2px solid color($primary);
 
 		&:hover {
-			background-color: lighten(color($primary, light), 20%);
+			background-color: color($primary, light);
+			color: color($white) !important;
 		}
 	}
 

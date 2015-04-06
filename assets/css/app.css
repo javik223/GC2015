@@ -682,7 +682,7 @@ strong, b {
   text-align: right;
 }
 
-.text-light, .blogs .item a {
+.text-light, .blogs .item h3 {
   font-weight: 100;
 }
 
@@ -744,7 +744,7 @@ h5, .epsilon {
 
 small, .small {
   font-size: 80%;
-  line-height: 1.2;
+  line-height: 1.6;
 }
 
 em {
@@ -877,9 +877,11 @@ button:hover, .button:hover {
 .button-inverse {
   background-color: white;
   color: #45468c !important;
+  border: 2px solid #45468c;
 }
 .button-inverse:hover {
-  background-color: #9c9dce;
+  background-color: #5859ac;
+  color: white !important;
 }
 .button-big {
   font-size: 1.25rem !important;
@@ -1072,6 +1074,78 @@ button:hover, .button:hover {
   height: 1px;
 }
 
+input {
+  font-family: "Roboto", Lato, Helvetica, sans;
+  padding: 0.625rem;
+  font-size: 1.125rem;
+  min-width: 18.75rem;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  color: #45468c;
+  margin-bottom: 1.25rem;
+  background-color: whitesmoke;
+  border-radius: 0.1875rem;
+}
+input::-webkit-input-placeholder {
+  color: #b6b6b6;
+}
+input::-moz-placeholder {
+  color: #b6b6b6;
+}
+input:-moz-placeholder {
+  color: #b6b6b6;
+}
+input:-ms-input-placeholder {
+  color: #b6b6b6;
+}
+input:focus {
+  outline: none;
+}
+
+.blinking {
+  position: relative;
+}
+.blinking:before {
+  content: '|';
+  font-weight: 900;
+  font-size: 1.875rem;
+  -webkit-animation: blink 1s infinite;
+  -moz-animation: blink 1s infinite;
+  animation: blink 1s infinite;
+  color: #45468c;
+}
+
+@-webkit-keyframes blink {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: #45468c;
+  }
+}
+@-moz-keyframes blink {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: #45468c;
+  }
+}
+@keyframes blink {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: #45468c;
+  }
+}
 .header {
   float: left;
   width: 100%;
@@ -1090,6 +1164,8 @@ button:hover, .button:hover {
   font-size: 1.125rem;
   line-height: 1.6;
   font-weight: 100;
+  position: relative;
+  z-index: 10000;
 }
 @media only screen and (max-width: 40em) {
   .header .nav {
@@ -1224,6 +1300,11 @@ button:hover, .button:hover {
 .footer .copyright {
   margin-top: 2.5rem;
 }
+@media only screen and (max-width: 40em) {
+  .footer .quick-contact {
+    text-align: left;
+  }
+}
 
 .home-intro {
   padding-top: 3.75rem;
@@ -1304,14 +1385,14 @@ button:hover, .button:hover {
   border: 0.625rem solid white;
   position: relative;
 }
-.blogs .item a {
+.blogs .item h3 {
   color: #9c9c9c;
   -webkit-transition: all 3s ease;
   -moz-transition: all 3s ease;
   transition: all 3s ease;
 }
-.blogs .item a:hover {
-  color: #45468c;
+.blogs .item:hover h3 {
+  color: white;
 }
 .blogs .item_thumb {
   overflow: hidden;
@@ -1366,6 +1447,68 @@ button:hover, .button:hover {
 }
 .blogs .item:hover a {
   color: white;
+}
+
+.login-overlay {
+  width: 100%;
+  float: left;
+  min-height: 100%;
+  overflow: visible;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background-color: #45468c;
+}
+.login-overlay .side-icon {
+  min-height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30vw;
+  color: white;
+}
+.login-overlay .side-icon [class*="icon"] {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.login-overlay .content {
+  background-color: white;
+  min-height: 100%;
+  overflow: visible;
+  position: relative;
+}
+.login-overlay .content .close::before, .login-overlay .content .close::after {
+  background-color: #45468c !important;
+}
+.login-overlay .content .sign-in, .login-overlay .content .sign-up, .login-overlay .content .password-forgot {
+  padding: 2.5rem;
+}
+@media only screen and (min-width: 64.063em) {
+  .login-overlay .content .sign-in, .login-overlay .content .sign-up, .login-overlay .content .password-forgot {
+    padding: 5rem;
+  }
+}
+.login-overlay .content .sign-up, .login-overlay .content .password-forgot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  min-height: 100%;
+  display: none;
+}
+.login-overlay .error {
+  color: red;
+  display: none;
+}
+.login-overlay .error.show {
+  display: block;
 }
 
 .about {

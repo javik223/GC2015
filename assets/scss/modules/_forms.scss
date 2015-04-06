@@ -7,8 +7,10 @@ input {
 	@include appearance( none );
 	color: color($primary);
 	margin-bottom: $padding;
+	background-color: lighten(color($gray), 35%);
+	border-radius: rem-calc(3);
 
-	@include placeholder { color: lighten(color($primary), 30) };
+	@include placeholder { color: lighten(color($gray), 10) };
 
 	&:focus {
 		outline: none;
