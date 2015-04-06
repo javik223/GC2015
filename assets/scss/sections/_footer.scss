@@ -1,0 +1,18 @@
+.footer {
+	float: left;
+	width: 100%;
+	padding-top: $padding * 5;
+	padding-bottom: $padding * 3;
+
+	a {
+		color: color($gray);
+
+		&:hover {
+			color: color($primary);
+		}
+	}
+
+	.copyright {
+		margin-top: $padding * 2;
+	}
+}

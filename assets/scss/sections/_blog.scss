@@ -1,0 +1,116 @@
+.blog{
+	@extend .container;
+	background-color: lighten(color($gray), 36%);
+	padding-top: $padding * 3;
+	padding-bottom: $padding * 3;
+
+	p {
+		//font-size: rem-calc(16);
+		//line-height: 1.4;
+	}
+	&_post {
+		overflow: hidden;
+
+		&:hover {
+			background-color: color($primary);
+
+			img {
+				@include transform( scale(1.4) );
+				opacity: 1;
+				-webkit-filter: grayscale(0%);
+				filter: grayscale(0%);
+				filter: gray;
+			}
+
+			.blog_text {
+				background-color: color($primary);
+				color: color($white);
+
+				p {
+					color: color($white);
+				}
+
+				&:after {
+					@include triangle(rem-calc(20), color($primary), up);
+				}
+			}
+		}
+	}
+
+	img {
+		width: 100%;
+		opacity: 0.5;
+		-webkit-filter: grayscale(100%);
+		filter: grayscale(100%);
+		filter: gray;
+		filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+		@include transition ( transform 5.0s ease-in-out );
+		transform-origin: top center;
+	}
+
+	&_text {
+		background-color: color($white);
+		color: color($gray);
+		float: left;
+		width: 100%;
+		height: auto;
+		
+		padding: $padding;
+		position: relative;
+		@include transition ( all 1s ease-out );
+
+		@media #{$medium-only} {
+			height: 200px;
+		}
+
+		@media #{$large-up} {
+			height: 150px;
+		}
+
+		h3 {
+			line-height: 1.4;
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: rem-calc(-12);
+			left: 50%;
+			@include triangle(rem-calc(20), color($white), up);
+			@include transform( translateX(-50%) );
+			@include transition ( all 1s ease-out );
+		}
+	}
+}
+
+.blog-single{
+	@extend .container;
+	background-color: lighten(color($gray), 36%);
+	padding-top: $padding * 3;
+	padding-bottom: $padding * 3;
+
+	font-size: rem-calc(16);
+	line-height: 1.6;
+
+	p {
+		font-size: rem-calc(16);
+		line-height: 1.6;
+	}
+
+	ul {
+		li {
+			margin-bottom: $padding * 0.5;
+			list-style: disc;
+		}
+	}
+
+	&_sidebar {
+		.blog-text-heading {
+			border-bottom: 1px solid lighten(color($gray), 20%);
+			span {
+				vertical-align: middle;
+			}
+		}
+		//color: lighten(color($gray), 5%);
+	}
+}

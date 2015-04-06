@@ -1,0 +1,35 @@
+input {
+	font-family: $base-font-family;
+	padding: $padding * 0.5;
+	font-size: rem-calc(18);
+	min-width: rem-calc(300);
+	border: none;
+	@include appearance( none );
+	color: color($primary);
+	margin-bottom: $padding;
+
+	@include placeholder { color: lighten(color($primary), 30) };
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.blinking {
+	position: relative;
+
+	&:before {
+		content: '|';
+		//position: absolute;
+		font-weight: 900;
+		font-size: rem-calc(30);
+		@include animation( blink 1.0s infinite );
+		color: color($primary);
+	}
+}
+
+
+@include keyframes( blink ) {
+	from { color: transparent} 
+	to { color: color($primary)}
+}

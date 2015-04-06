@@ -1,0 +1,46 @@
+.contact {
+	@extend .container;
+	background-color: lighten(color($gray), 36%);
+	padding-top: $padding * 3;
+	padding-bottom: $padding * 3;
+
+	p {
+		//font-size: rem-calc(16);
+		line-height: 1.6;
+	}
+
+	hr {
+		border: 1px solid lighten(color($gray), 30%);
+		border-style: solid;
+		border-width: 1px;
+		margin: 0;
+	}
+
+	&_image {
+		img {
+			width: 100%;
+		}
+		@media #{$medium-only} {
+			img {
+				max-width: 90%;
+			}
+		}
+
+		@media #{$large-up} {
+			img {
+				width: auto;
+			}
+		}
+	}
+
+	&_address {
+		background-color: color($white);
+		border-bottom: 1px solid lighten(color($gray), 30%);
+		@include transition ( all 1.0s ease-in-out );
+
+		&:hover {
+			background-color: lighten(color($gray), 30%);
+			color: color($white);
+		}
+	}
+}

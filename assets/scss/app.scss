@@ -1,0 +1,34 @@
+//Defaults & Framework
+@import 
+	"bourbon",
+	"compass/reset",
+	"framework/global",
+	"framework/settings",
+	"framework/grid";
+
+// Modules
+@import 
+	"modules/colors",
+	"modules/typography",
+	"modules/icons",
+	"modules/lists",
+	"modules/buttons";
+
+// Sections
+@import
+	"sections/header",
+	"sections/footer",
+	"sections/home",
+	"sections/about",
+	"sections/services",
+	"sections/contact",
+	"sections/blog";
+
+
+html{
+	overflow-x: hidden;
+}
+
+.disable-scroll {
+	overflow-y: hidden;
+}

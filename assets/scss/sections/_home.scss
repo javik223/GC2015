@@ -1,0 +1,150 @@
+.home-intro {
+	padding-top: $padding * 3;
+	padding-bottom: $padding * 3;
+}
+// Competence tease
+.comp-tease {
+	font-size: rem-calc(20);
+
+	.col {
+		text-align: center;
+	}
+
+	.icon {
+		text-align: center;
+	}
+
+	span {
+		vertical-align: middle !important;
+		text-align: center;
+	}
+
+	[class*="icon-"] {
+		font-size: rem-calc(80);
+		line-height: rem-calc(80);
+	}
+}
+.home-banners_wrapper {
+	float: left;
+	position: relative;
+	width: 100%;
+
+	@media #{$small-only} {
+		.arrows {
+			@include transform( scale(0.5) );
+			top: -$padding;
+		}
+	}
+}
+.home-banners {
+	width: 100% !important;
+	overflow-x: hidden;
+	border-right: none;
+
+	img {
+		float: left;
+	}
+
+	@media #{$small-only} {
+		text-align: right;
+
+		img {
+			width: 180%;
+			max-width: none;
+			text-align: right;
+			float: right;
+			margin-right: -$padding * 3;
+		}
+	}
+
+	.item {
+		float: left;
+	}
+}
+.begin-laundry {
+	span {
+		vertical-align: middle;
+	}
+
+	[class*="icon-"] {
+		font-size: rem-calc(60);
+	}
+}
+.iro {
+	padding-top: $padding * 3;
+	padding-bottom: $padding * 3;
+}
+.blogs {
+	.item {
+		@extend .col;
+		@extend .m-4-12;
+		border: rem-calc(10) solid color($white);
+		position: relative;
+
+		a {
+			color: color($gray);
+			@extend .text-light;
+			@include transition ( all 3s ease );
+
+			&:hover {
+				color: color($primary);
+			}
+		}
+
+		&_thumb {
+			overflow: hidden;
+		}
+
+		img {
+			width: 100%;
+			opacity: 0.2;
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+			filter: gray;
+			filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+			@include transition ( filter 0.6s ease-in-out, opacity 0.6s ease-in-out, transform 3s ease-in-out);
+		}
+
+		&_title {
+			line-height: 1.4;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			padding: $padding;
+			@extend .text-serif;
+			font-size: rem-calc(24);
+			width: 100%;
+			z-index: 200;
+		}
+
+		&:after {
+			content: '';
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: transparent;
+			z-index: 20;
+			@include transition ( all 1s ease-in-out );
+		}
+
+		&:hover {
+			img {
+				opacity: 1;
+				-webkit-filter: grayscale(0%);
+				filter: grayscale(0%);
+				filter: gray;
+				@include transform( scale(1.2) );
+			}
+
+			&:after {		
+				background-color: rgba(color($primary), 0.5);
+			}
+
+			a {
+				color: color($white);
+			}
+		}
+	}
+}

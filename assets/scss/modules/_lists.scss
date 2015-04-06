@@ -1,0 +1,21 @@
+.list-bullet {
+	margin-bottom: $padding;
+	position: relative;
+
+	li {
+		position: relative;
+		margin-left: $padding;
+		margin-bottom: $padding * 0.5;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: $padding * 0.3;
+			left: -$padding;
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background-color: color($gray);
+		}
+	}
+}

@@ -1,0 +1,148 @@
+.header {
+	float: left;
+	width: 100%;
+	padding: $padding;
+	padding: $padding;
+
+	position: relative;
+
+	@media #{$medium-up} {
+		padding-top: $padding * 2;
+		padding-bottom: $padding * 2;
+	}
+
+	.nav {
+		font-family: 'Playfair Display', serif;
+		font-size: rem-calc(18);
+		line-height: 1.6;
+		font-weight: 100;
+
+		@media #{$small-only} {
+			display: none;
+			position: absolute;
+			background-color: color($primary);
+			left: 0;
+			top: 0;
+			width: 80%;
+			padding-top: $padding * 2;
+		}
+
+		a {
+			color: color($white);
+
+			@media #{$medium-up} {
+				color: darken(color($gray), 10%);
+
+				&:hover {
+					color: color($primary);
+				}
+			}
+		}
+
+		li {
+			@media #{$small-only} {
+				position: relative;
+				padding: $padding * 0.5;
+				padding-left: $padding * 2;
+				border-bottom: 1px solid lighten(color($primary), 5%);
+
+				&:hover {
+					background-color: darken(color($primary), 3%);
+				}
+
+				&.light {
+					background-color: color($white);
+					border-bottom: 1px solid lighten(color($gray), 30%);
+					@include inline-block;
+					width: 100%;
+
+					a {
+						color: color($gray);
+
+						&:hover, &:active {
+							color: color($primary);
+						}
+					}
+
+					&:nth-of-type(6) {
+						padding-top: $padding * 2;
+					}
+
+					&:last-child {
+						padding-bottom: $padding * 4;
+						border-bottom: none;
+					}
+				}
+			}
+
+			span {
+				vertical-align: middle;
+			}
+			[class*="icon"] {
+				font-size: rem-calc(60);
+				line-height: rem-calc(60);
+				margin-left: -$padding * 0.5;
+			}
+		}
+	}
+
+	.logo {
+		img {
+			width: rem-calc(80);
+
+			@media #{$medium-up} {
+				width: auto;
+			}
+		}
+		h1 {
+			width: 0;
+			height: 0;
+			overflow: hidden;
+			color: transparent;
+			@include user-select( none );
+			display: none;
+		}
+	}
+
+	.login-social {
+		display: none;
+
+		@media #{$medium-up} {
+			display: block;
+		}
+
+		a {
+			padding-left: $padding * 0.2;
+			padding-bottom: $padding * 0.2;
+			@include inline-block;
+			color: color($gray);
+
+			&:hover {
+				color: color($primary);
+			}
+		}
+
+		[class*="icon-"] {
+			font-size: rem-calc(20);
+		}
+
+		.text-bold {
+			border-bottom: 1px dotted lighten(color($gray), 30%);
+			margin-bottom: $padding;
+		}
+	}
+
+	.menu {
+		position: absolute;
+		top: $padding * 0.8;
+		right: $padding;
+		font-size: rem-calc(24);
+		cursor: pointer;
+		padding: rem-calc(20);
+		z-index: 1000;
+
+		@media #{$medium-up} {
+			display: none;
+		}
+	}
+}

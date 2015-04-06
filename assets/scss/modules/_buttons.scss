@@ -1,0 +1,159 @@
+button, .button {
+	background-color: color($primary);
+	padding: $padding * 0.7 $padding * 2;
+	color: color($white) !important;
+	text-decoration: none;
+	border-radius: rem-calc(4);
+	@include transition ( background-color, transform 0.6s ease-in-out );
+	@include inline-block;
+
+	&:hover {
+		background-color: darken(color($primary), 10%);
+		@include transform( scale(1.1) );
+	}
+}
+.button {
+	&-inverse {
+		background-color: color($white);
+		color: color($primary) !important;
+
+		&:hover {
+			background-color: lighten(color($primary, light), 20%);
+		}
+	}
+
+	&-big {
+		font-size: rem-calc(20) !important;
+		line-height: 1;
+	}
+}
+
+// Arrow Buttons
+
+.arrows {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	@include transform( scale(0.7) );
+	width: 60px;
+
+	@media #{$medium-only} {
+		@include transform( scale(0.8) );
+	}
+
+	@media #{$large-up} {
+		@include transform( scale(0.9) );
+		top: $padding;
+		left: $padding;
+	}
+
+
+	.arrow {
+		width: 60px;
+		height: 60px;
+		background-color: color($white);
+		border-radius: 50%;
+		@include inline-block;
+		position: relative;
+		cursor: pointer;
+		float: left;
+		margin-bottom: rem-calc(5);
+
+		&:before, &:after {
+			content: '';
+			@include inline-block;
+			width: 50%;
+			height: 1px;
+			background-color: color($primary);
+			position: relative;
+			left: rem-calc(3);
+			top: rem-calc(5);
+		}
+
+		&:before {
+			@include transform-origin( right bottom );
+			@include transform( rotate(45deg) translateX(14px));
+			@include transition ( all 0.3s ease-in-out );
+		}
+
+		&:after {
+			@include transform-origin( right bottom );
+			@include transform( rotate(-45deg) translateX(15.5px) );
+			@include transition ( all 0.3s ease-in-out );
+		}
+
+		&:hover {
+			&:before {
+				@include transform( rotate(15deg) translateX(16px) translateY(5px) );
+			}
+			&:after {
+				@include transform( rotate(-15deg) translateX(17px) translateY(-7px) );
+			}
+	}
+
+	&.arrow-left {
+		left: -rem-calc(10);
+
+		&:before {
+			@include transform-origin( right bottom );
+			@include transform( rotate(-45deg) translateX(16px));
+			@include transition ( all 0.3s ease-in-out );
+		}
+
+		&:after {
+			@include transform-origin( right bottom );
+			@include transform( rotate(45deg) translateX(15px) );
+			@include transition ( all 0.3s ease-in-out );
+		}
+
+		&:hover {
+			&:before {
+				@include transform( rotate(-15deg) translateX(16px) translateY(5px) );
+			}
+			&:after {
+				@include transform( rotate(15deg) translateX(15px) translateY(-7px) );
+			}
+		}
+}
+}
+}
+
+.close{
+  position: absolute;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  top: $padding;
+  right: $padding;
+  cursor: pointer;
+
+  &:hover {
+    &::before, &::after {
+      background: color($primary);
+    }
+  }
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: color($white);
+  }
+  &::before {
+    @include transform(rotate(45deg));
+  }
+  &::after {
+    @include transform(rotate(-45deg));
+  }
+  &.hairline {
+    &::before, &::after {
+      height: 1px;
+    }
+  }
+}

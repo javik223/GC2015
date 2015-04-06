@@ -1,0 +1,116 @@
+$base-font-size: rem-calc(14);
+$base-line-height: rem-calc(20);
+$base-font-family: 'Roboto', Lato, Helvetica, sans;
+// Header elements
+
+body, p {
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+	font-family: $base-font-family;
+	font-weight: 100;
+	color: darken(color($gray), 10%);
+	letter-spacing: 0.1px;
+}
+p {
+	margin-bottom: $base-line-height;
+}
+
+$h1: (
+	font-size: rem-calc(59),
+	font-weight: 300,
+	line: 20,
+	lines: 3
+);
+$h2: (
+	font-size: rem-calc(37),
+	font-weight: 300,
+	line: 20,
+	lines: 2
+	);
+$h3: (
+	font-size: rem-calc(23),
+	font-weight: 300,
+	line: 20,
+	lines: 2
+);
+
+$h4: (
+	font-size: rem-calc(18),
+	font-weight: 300,
+	line: 16,
+	lines: 1.6
+);
+
+$h5: (
+	font-size: rem-calc(16),
+	font-weight: 300,
+	line: 16,
+	lines: 1
+);
+
+.spaced-heading {
+	letter-spacing: 3px;
+}
+
+// Basic text property for basic HTML elements
+
+a {
+	text-decoration: none;
+}
+
+strong, b {
+	font-weight: 300;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+.text-light {
+	font-weight: 100;
+}
+.text-uppercase {
+	text-transform: uppercase;
+}
+.text-bold {
+	font-weight: 300;
+}
+.text-thick {
+	font-weight: 900 !important;
+	//letter-spacing: -2px;
+}
+.text-serif {
+	font-family: 'Playfair Display', serif;
+}
+h1, .alpha {
+	@include header($h1);
+}
+h2, .beta {
+	@include header($h2);
+}
+h3, .gamma {
+	@include header($h3);
+}
+h4, .omega {
+	@include header($h4);
+}
+h5, .epsilon {
+	@include header($h5);
+}
+small, .small {
+	font-size: 80%;
+	line-height: 1.2;
+}
+em {
+	font-style: italic;
+}
+
+// Margin and paddings
+// No-margin top
+.nmt {
+	margin-top: 0;
+}
