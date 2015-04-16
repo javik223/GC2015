@@ -44,3 +44,34 @@
 		}
 	}
 }
+.contact_address {
+	@media #{$large-up} {
+		height: rem-calc(350);
+
+		.contact_image {
+			overflow-x: hidden;
+			img {
+				height: rem-calc(350);
+				max-width: none !important;
+				width: auto;
+			}
+		}
+	}
+
+	.contact_text {
+		padding: $padding;
+	}
+}
+.mapCanvas {
+	width: 100%;
+	min-height: rem-calc(350);
+	opacity: 0.2;
+	@include transition ( opacity 0.6s ease-in-out );
+}
+.map {
+	&:hover {
+		.mapCanvas {
+			opacity: 1;
+		}
+	}
+}

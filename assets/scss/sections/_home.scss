@@ -61,6 +61,7 @@
 		float: left;
 	}
 }
+// Begin Laundry Button
 .begin-laundry {
 	span {
 		vertical-align: middle;
@@ -70,10 +71,13 @@
 		font-size: rem-calc(60);
 	}
 }
+// Buba and Iro Hero Image
 .iro {
 	padding-top: $padding * 3;
 	padding-bottom: $padding * 3;
 }
+
+// Blog Panels, including title, image and image
 .blogs {
 	.item {
 		@extend .col;
@@ -147,72 +151,6 @@
 			a {
 				color: color($white);
 			}
-		}
-	}
-}
-.login-overlay {
-	width: 100%;
-	float: left;
-	min-height: 100%;
-	overflow: visible;
-	position: absolute;
-	display: none;
-	top: 0;
-	left: 0;
-	z-index: 10000;
-	background-color: color($primary);
-
-	.side-icon {
-		min-height: 100%;
-		text-align: center;
-		vertical-align: middle;
-		font-size: 30vw;
-		color: color($white);
-
-		[class*="icon"] {
-			position: absolute;
-			top: 50%;
-			@include transform( translateX(-50%) translateY(-50%) );
-		}
-	}
-
-	.content {
-		background-color: color($white);
-		min-height: 100%;
-		overflow: visible;
-		position: relative;
-
-		.close {
-			&::before, &::after {
-				background-color: color($primary) !important;
-			}
-		}
-
-		.sign-in, .sign-up, .password-forgot {
-			padding: $padding * 2;
-
-			@media #{$large-up} {
-				padding: $padding * 4;
-			}
-		}
-
-		.sign-up, .password-forgot {
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 100%;
-			background-color: color($white);
-			min-height: 100%;
-			display: none;
-		}
-	}
-
-	.error {
-		color: red;
-		display: none;
-
-		&.show {
-			display: block;
 		}
 	}
 }

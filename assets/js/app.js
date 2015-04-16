@@ -1,5 +1,9 @@
 'use strict()';
 
+/* 
+** Show or hide sidebar menu on mobile screens.
+** works by clicking the hamburger menu on mobile
+*/
 function ToggleMenu(menuBtn, navElem) {
     this.menuBtn = menuBtn;
     this.navElem = navElem;
@@ -9,24 +13,29 @@ function ToggleMenu(menuBtn, navElem) {
     this.init();
 }
 
+//Initialize ToggleMenu Class {Constructor}
+
 ToggleMenu.prototype.init = function(){
-    var navElemHeight = this.navElem.innerHeight(),
+    var navElemHeight = this.navElem.innerHeight(), // Full height of Nav element 
         navListContainer = this.navElem.find("ul"),
         navLists = this.navElem.find("li");
 
-
+    //Set Nav element to zero height opacity, animate to full height, then fade each individual link element into view
     this.playhead.set(tSelf.navElem, {height: "0px", overflow: "hidden"})
-                .set(navListContainer, {autoAlpha: 0})
-                .set(navLists, {autoAlpha: 0})
-                .to(tSelf.navElem, 0.6, {display: "block", height: navElemHeight + "px", ease: Expo.easeOut})
-                .to(navListContainer, 0.6, {autoAlpha: 1})
-                .staggerTo(navLists, 0.6, {autoAlpha: 1}, 0.1, "-=1");
+        .set(navListContainer, {autoAlpha: 0})
+        .set(navLists, {autoAlpha: 0})
+        .to(tSelf.navElem, 0.6, {display: "block", height: navElemHeight + "px", force3D: true, ease: Expo.easeOut})
+        .to(navListContainer, 0.6, {autoAlpha: 1})
+        .staggerTo(navLists, 0.6, {autoAlpha: 1}, 0.1, "-=1");
 
+    //Click handler for button
     this.menuBtn.on('click', this.showHideMenu);
 };
 
+/*
+** Show or hide Nav element, depending on the visibility of the Nav Element
+*/
 ToggleMenu.prototype.showHideMenu = function() {
-    console.log(tSelf.navVisible);
    if (tSelf.navVisible === false) {
         tSelf.showMenu();
    } else {
@@ -36,76 +45,145 @@ ToggleMenu.prototype.showHideMenu = function() {
    tSelf.navVisible = !tSelf.navVisible;
 };
 
+// Reset timeline playhead animate the Nav element into view
 ToggleMenu.prototype.showMenu = function() {
     this.playhead.timeScale(1);
     this.playhead.play();
 };
 
+// Speedup timeline's playhead and hide Nav element from view
 ToggleMenu.prototype.hideMenu = function() {
     this.playhead.timeScale(4);
     this.playhead.reverse();
 };
 
 
+/*
+** Service Class
+** Loads a new Service item in the Service page and displays it.
+** Loads elements with JSON and insert them into an overlay view.
+*/
 function Service() {
-  this.el = $(".service-overlay");
-  this.links = $(".services").find(".container").find("a");
-  this.linkIndex = 0;
-  this.playHead = new TimelineMax({paused: true, yoyo: true});
-  this.prevElem = this.el.find(".arrow-left");
-  this.nextElem = this.el.find(".arrow-right");
-  this.closeElem = this.el.find(".close");
-  this.visible = false;
-  self = this;
-  this.init();
+    // The Service Overlay element 
+    this.el = $(".service-overlay");
+
+    // Get clicked service link
+    this.links = $(".services").find(".container").find("a");
+    this.linkIndex = 0;
+    
+    // Animation timeline playhead
+    this.playHead = new TimelineMax({paused: true, yoyo: true});
+
+    // Overlay nagivation elements
+    this.prevElem = this.el.find(".arrow-left");
+    this.nextElem = this.el.find(".arrow-right");
+    this.closeElem = this.el.find(".close");
+
+    // Visibility state of Services Overlay
+    this.visible = false;
+    self = this;
+    
+    // Initialize Initializer
+    this.init();
 
 }
 
+
+/** Services Initializer
+**  Fades the Overlay element into view and initialize animation timeline
+**/
 Service.prototype.init = function(){
-  var overlayImage = this.el.find(".overlay_image"),
-      overlayText = this.el.find(".overlay_text"),
-      overlayNavs = this.el.find('.overlay_arrows .arrow');
+    var overlayImage = this.el.find(".overlay_image"),
+        overlayText = this.el.find(".overlay_text"),
+        overlayNavs = this.el.find('.overlay_arrows .arrow');
 
-  this.playHead.set(this.el, {display: "block", xPercent: "100%", autoAlpha: 0, onReverseComplete: function(){self.visible=false; self.resetPlayHead();}})
-              .set(overlayImage, {yPercent: "50%", autoAlpha: 0})
-              .set(overlayText, {yPercent: "20%", autoAlpha: 0})
-              .set(overlayNavs, {autoAlpha: 0})
-              .set(self.closeElem, {autoAlpha: 0})
-              .to(".services .container", 1, {className: "+=gray"})
-              .to(this.el, 1, {xPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeInOut})
-              .to(overlayImage, 0.8, {yPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeOut})
-              .to(overlayText, 1, {yPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeOut})
-              .staggerTo(overlayNavs, 1, {autoAlpha: 1, force3D: true, ease: Power4.easeOut}, 0.5)
-              .to(self.closeElem, 0.3, {autoAlpha: "1", force3D: true, ease: Quad.easeOut}, 1);
+    this.playHead.set(this.el, {display: "block", xPercent: "100%", autoAlpha: 0, onReverseComplete: function(){self.visible=false; self.resetPlayHead();}})
+                  .set(overlayImage, {yPercent: "50%", autoAlpha: 0})
+                  .set(overlayText, {yPercent: "20%", autoAlpha: 0})
+                  .set(overlayNavs, {autoAlpha: 0})
+                  .set(self.closeElem, {autoAlpha: 0})
+                  .to(".services .container", 1, {className: "+=gray"})
+                  .to(this.el, 1, {xPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeInOut})
+                  .to(overlayImage, 0.8, {yPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeOut})
+                  .to(overlayText, 1, {yPercent: "0%", autoAlpha: "1", force3D: true, ease: Expo.easeOut})
+                  .staggerTo(overlayNavs, 1, {autoAlpha: 1, force3D: true, ease: Power4.easeOut}, 0.5)
+                  .to(self.closeElem, 0.3, {autoAlpha: "1", force3D: true, ease: Quad.easeOut}, 1);
 
 
-  this.nextElem.on('click', function(){
-    self.next();
-  });
+    // Event handlers for navigation elements
 
-  this.prevElem.on('click', function(){
-    self.prev();
-  });
+    // Trigger Previous Service Event
+    this.prevElem.on('click', function(){
+        $(window).trigger('servicePrev');
+    });
 
-  this.closeElem.on('click', function(){
-    self.playHead.timeScale(3);
-    self.close();
-  });
+     // Trigger Next Service Event
+    this.nextElem.on('click', function(){
+        $(window).trigger('serviceNext');
+    });
+
+    // Trigger Close Service Event
+    this.closeElem.on('click', function(){
+        $(window).trigger('serviceClose');
+    });
+
+    // Fulfill Prev Service trigger
+    $(window).on('servicePrev', function() {
+        self.prev();
+    });
+
+    // Fulfill Next Service trigger
+    $(window).on('serviceNext', function(){
+        self.next();
+    });
+
+    // Fulfill Close Service trigger
+    $(window).on('serviceClose', function(){
+        self.playHead.timeScale(3);
+        self.close();
+    });
+
+    /*
+    ** Enable keys for navigation
+    ** Close Overlay if Esc key is pressed
+    ** Go to next Service if Forward and Down Key is pressed
+    ** Go to previous Service if Up and Back Key is pressed
+    */
+    $(window).on('keydown', function(e) {
+        if (self.isVisible()) {
+            if (e.which == 27) {
+                $(window).trigger('serviceClose');
+            }
+            if (e.which == 37) {
+                $(window).trigger('servicePrev');
+            }
+            if (e.which == 38) {
+                $(window).trigger('servicePrev');
+            }
+            if (e.which == 40) {
+                $(window).trigger('serviceNext');
+            }
+            if (e.which == 39) {
+                $(window).trigger('serviceNext');
+            }
+        }
+
+        e.preventDefault();
+    });
 };
 
 Service.prototype.prev = function() {
-   this.setIndex(this.linkIndex-1);
-  this.load("", this.linkIndex);
+    this.setIndex(this.linkIndex-1);
+    this.load("", this.linkIndex);
 };
 
 Service.prototype.next = function() {
-  this.setIndex(this.linkIndex+1);
-  console.log(parseInt(this.linkIndex+1));
-  this.load("", parseInt(this.linkIndex));
+    this.setIndex(this.linkIndex+1);
+    this.load("", parseInt(this.linkIndex));
 };
 
 Service.prototype.close = function() {
-  this.playHead.reverse();
+    this.playHead.reverse();
 };
 
 Service.prototype.isVisible = function() {
@@ -319,7 +397,98 @@ SignupsOverlay.prototype.close = function() {
   this.playHead.reverse();
 };
 
+function map(elem, elIndex){
+  var el = $(elem);
+  var lat = el.data('lat');
+  var lng = el.data('lng');
+  var contentString  = '<div class="content">' + el.find('.contact_text').html() + '</div>'; 
+  contentString = contentString.replace("<h3>", "<h3>Garment Care ");
+  var mapCanvas = document.querySelectorAll(".map")[elIndex].querySelector(".mapCanvas");
+
+  var latLng = new google.maps.LatLng(lat, lng);
+
+      //Map Styles
+      var mapStyles = [
+      {
+        stylers: [
+          { hue: "#45468c" },
+          { saturation: 0 }
+        ]
+      },{
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [
+          { lightness: 100 },
+          { visibility: "simplified" }
+        ]
+      },{
+        featureType: "road",
+        elementType: "labels",
+        stylers: [
+          //{ visibility: "off" }
+          { lightness: 20 }
+        ]
+      }
+    ];
+
+
+      var styledMap = new google.maps.StyledMapType(mapStyles, {name: "Styled Map"});
+
+      // Map Options
+      var mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControlOptions: {
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+        }
+      };
+
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          maxWidth: 200
+      });
+
+      var marker = new google.maps.Marker({
+          position: latLng,
+          title: "Hello World!",
+          animation: google.maps.Animation.DROP,
+          //icon: image
+      });
+
+    var gMap = new google.maps.Map(mapCanvas, mapOptions);
+    gMap.mapTypes.set('map_style', styledMap);
+    gMap.setMapTypeId('map_style');
+
+    // Add Marker to map
+    marker.setMap(gMap);
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(gMap,marker);
+    });
+
+}
+
+google.maps.event.addDomListener(window, 'load', function(){
+  buildMaps();
+});
+
+
+function buildMaps() {
+  var maps = $(".map");
+
+  if (maps.length <= 0 ) { 
+    return 0;
+  }
+  
+  for (var i=0; i < maps.length; i++) {
+    map(maps[i], i);
+  }
+
+}
+
 $(document).ready(function(){
+
    var $menu, $nav, _menu, $homeBanners, $services, signups, $loginBtn;
 
    $menu = $(".menu");
